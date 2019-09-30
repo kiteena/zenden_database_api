@@ -1,0 +1,419 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "ZenDen API Documentation",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "127.0.0.1:5000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Deep Learning & Recommenders"
+    },
+    {
+      "name": "Matches"
+    },
+    {
+      "name": "Houses",
+      "description": "House queries",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "user",
+      "description": "Operations about user"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/CNN": {
+      "get": {
+        "tags": [
+          "Deep Learning & Recommenders"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "folder_path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CNNBody"
+            }, 
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "problem with folder_path"
+          }
+        }
+      }
+    },
+    "/Predictions": {
+      "get": {
+        "tags": [
+          "Deep Learning & Recommenders"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "problem with folder_path"
+          }
+        }
+      }
+    },
+    "/Houses/{count}": {
+      "get": {
+        "tags": [
+          "Houses"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "count",
+            "type": "integer",
+            "description": "Houses a user hasn't seen",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/Houses": {
+      "post": {
+        "tags": [
+          "Houses"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created house",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/House"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/Users": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "return users",
+        "description": "Currently returns the entire list because limited",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/Matches": {
+      "get": {
+        "tags": [
+          "Matches"
+        ],
+        "summary": "return matches",
+        "description": "Currently returns the entire list because limited",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Matches"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created house",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Match"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "name",
+        "email",
+        "address",
+        "city",
+        "zipcode"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "format": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "address": {
+          "type": "string",
+          "format": "string"
+        },
+        "city": {
+          "type": "string",
+          "format": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "string"
+        },
+        "income": {
+          "type": "number",
+          "format": "number"
+        },
+        "age": {
+          "type": "integer",
+          "format": "age"
+        },
+        "zipcode": {
+          "type": "integer",
+          "format": "integer"
+        },
+        "sjsu_affiliated": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "Female",
+            "Male",
+            "Other",
+            "Unspecified"
+          ]
+        },
+        "ownership": {
+          "type": "string",
+          "enum": [
+            "Rent",
+            "Own",
+            "Other",
+            "Unspecified"
+          ]
+        },
+        "education": {
+          "type": "string",
+          "enum": [
+            "Some High School",
+            "High School",
+            "Some College",
+            "Bachelors Degree",
+            "Masters Degree",
+            "Doctorate",
+            "Unspecified"
+          ]
+        }
+      }
+    },
+    "Match": {
+      "type": "object",
+      "required": [
+        "user_id",
+        "house_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "house_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "predicted_score": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "actual_score": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "viewed": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "House": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "number"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "number"
+        },
+        "address": {
+          "type": "string",
+          "format": "string"
+        },
+        "city": {
+          "type": "string",
+          "format": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "string"
+        },
+        "zipcode": {
+          "type": "integer",
+          "format": "integer"
+        },
+        "urls": {
+          "type": "string",
+          "format": "string"
+        },
+        "usecode": {
+          "type": "string",
+          "format": "string"
+        },
+        "num_bedrooms": {
+          "type": "integer",
+          "format": "integer"
+        },
+        "num_bathrooms": {
+          "type": "number",
+          "format": "number"
+        },
+        "house_sqft": {
+          "type": "integer",
+          "format": "integer"
+        },
+        "lot_sqft": {
+          "type": "integer",
+          "format": "integer"
+        },
+        "zpid": {
+          "type": "integer",
+          "format": "integer"
+        }
+      }
+    },
+    "CNNBody": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "format": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "string"
+        }
+      }
+    }
+  }
+}

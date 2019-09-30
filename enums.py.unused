@@ -1,0 +1,19 @@
+from enum import Enum
+
+class Gender(Enum): 
+    MALE = 'male'
+    FEMALE = 'female'
+    OTHER = 'other'
+    UNSPECIFIED = 'unspecified'
+
+
+class Education(Enum): 
+    SOME_HIGH_SCHOOL = 'somehighschool'
+    HIGH_SCHOOL_DIPLOMA = 'highschooldiploma'
+    SOME_COLLEGE = 'somecollege'
+    TRADE_SCHOOL = 'tradeschool'
+    BACHELORS_DEGREE = 'bachelorsdegree'
+    MASTERS_DEGREE = 'mastersdegree'
+    DOCTORATE_DEGREE = 'doctoratedegree'
+    UNSPECIFIED = 'unspecified'
+
