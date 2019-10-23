@@ -8,7 +8,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "127.0.0.1:5000",
+  "host": "zenden-api-heroku.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
@@ -48,7 +48,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "folder_path",
+            "name": "filenames",
             "type": "string"
           }
         ],
@@ -57,7 +57,7 @@
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/CNNBody"
-            }, 
+            },
             "headers": {
               "Access-Control-Allow-Origin": {
                 "type": "string"
@@ -65,7 +65,7 @@
             }
           },
           "400": {
-            "description": "problem with folder_path"
+            "description": "Verify files were uploaded to AWS bucket.Problem with filenames, submit as string separated by commas"
           }
         }
       }
@@ -87,7 +87,7 @@
             "description": "successful operation"
           },
           "400": {
-            "description": "problem with folder_path"
+            "description": "malformed url"
           }
         }
       }
