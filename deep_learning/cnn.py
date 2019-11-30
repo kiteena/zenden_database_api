@@ -10,8 +10,8 @@ test_path = 'deep_learning/serialized_models/data/'
 
 class CNN:  
     def __init__(self):
-        self.choices =['front', 'inside', 'house_other', 'not_house']
-        self.model = load_model('deep_learning/serialized_models/cnn_keras_2_2_5.h5')
+        self.choices =['Outside House', 'Outside Complex', 'Inside House', 'Bathroom', 'Bedroom', 'Kitchen', 'Yard Miscellaneous','Door','Sign','Arial View', 'Other']
+        self.model = load_model('deep_learning/serialized_models/cnn_50_80_130.h5')
         self.graph = tf.get_default_graph()
 
     def makeImageArray(self, directory): 
@@ -24,7 +24,7 @@ class CNN:
             path = os.path.join(directory, i)
             img = cv2.imread(path, cv2.COLOR_BGR2RGB)
             try: 
-                img = cv2.resize(img, (128,128))
+                img = cv2.resize(img, (64,64))
                 imgs.append(img)
             except: 
                 pass # hidden file throwing an error 

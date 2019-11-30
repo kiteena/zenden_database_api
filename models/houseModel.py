@@ -1,7 +1,6 @@
 from flask import Flask 
 from marshmallow import Schema, fields, validate 
 from flask_marshmallow import Marshmallow
-from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
 from models.baseModel import db, ma
 
